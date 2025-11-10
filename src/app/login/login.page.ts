@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { AppHeaderComponent } from '../components/app-header/app-header.component';
@@ -11,7 +11,7 @@ import { AppHeaderComponent } from '../components/app-header/app-header.componen
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [AppHeaderComponent, CommonModule, IonicModule, ReactiveFormsModule]
+  imports: [CommonModule, IonicModule, ReactiveFormsModule, AppHeaderComponent]
 })
 export class LoginPage implements OnInit {
   form: FormGroup;
@@ -20,26 +20,26 @@ export class LoginPage implements OnInit {
   constructor(private fb: FormBuilder, private auth: AuthService, public router: Router) {
     this.form = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      password: ['', Validators.required]
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 
-  submit() {
+  async submit() {
     this.error = null;
-    if (this.form.invalid) {
-      this.error = 'Completa los campos';
-      return;
-    }
-
+    if (this.form.invalid) { this.error = 'Completa los campos'; return; }
     const { email, password } = this.form.value;
-    const res = this.auth.login(email, password);
-    if (!res.ok) {
-      this.error = res.msg || 'Credenciales inválidas';
-      return;
+    try {
+      // Llamar con los 2 argumentos que espera el servicio
+      await this.auth.login(email || '', password || '');
+      this.router.navigate(['/home']);
+    } catch (err: any) {
+      this.error = err?.message ?? 'Error al iniciar sesión';
     }
+  }
 
-    this.router.navigate(['/home']);
+  goToRegister() {
+    this.router.navigate(['/register']);
   }
 }

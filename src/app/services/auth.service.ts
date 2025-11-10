@@ -1,61 +1,55 @@
 import { Injectable } from '@angular/core';
 
 export interface User {
-  id: string;
-  name: string;
   email: string;
-  password: string;
+  password: string; // demo: no en producción
+  name?: string;
 }
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root'
 })
 export class AuthService {
-  private USERS_KEY = 'pc_users';
-  private CURRENT_KEY = 'pc_current_user';
+  private storageKey = 'app_users';
+  private sessionKey = 'app_session';
 
   constructor() {}
 
-  private readUsers(): User[] {
-    const raw = localStorage.getItem(this.USERS_KEY);
-    return raw ? JSON.parse(raw) as User[] : [];
+  private loadUsers(): User[] {
+    const raw = localStorage.getItem(this.storageKey);
+    return raw ? JSON.parse(raw) : [];
   }
 
   private saveUsers(users: User[]) {
-    localStorage.setItem(this.USERS_KEY, JSON.stringify(users));
+    localStorage.setItem(this.storageKey, JSON.stringify(users));
   }
 
-  register(name: string, email: string, password: string): { ok: boolean; msg?: string } {
-    const users = this.readUsers();
-    if (users.find(u => u.email.toLowerCase() === email.toLowerCase())) {
-      return { ok: false, msg: 'El correo ya está registrado' };
+  register(user: User): { ok: boolean; message: string } {
+    const users = this.loadUsers();
+    if (users.find(u => u.email === user.email)) {
+      return { ok: false, message: 'El correo ya está registrado' };
     }
-    const id = Date.now().toString();
-    const newUser: User = { id, name, email, password };
-    users.push(newUser);
+    users.push(user);
     this.saveUsers(users);
-    localStorage.setItem(this.CURRENT_KEY, JSON.stringify(newUser));
-    return { ok: true };
+    return { ok: true, message: 'Usuario creado' };
   }
 
-  login(email: string, password: string): { ok: boolean; msg?: string } {
-    const users = this.readUsers();
-    const user = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password);
-    if (!user) return { ok: false, msg: 'Credenciales inválidas' };
-    localStorage.setItem(this.CURRENT_KEY, JSON.stringify(user));
-    return { ok: true };
+  login(email: string, password: string): { ok: boolean; message: string } {
+    const users = this.loadUsers();
+    const found = users.find(u => u.email === email && u.password === password);
+    if (!found) {
+      return { ok: false, message: 'Credenciales inválidas' };
+    }
+    localStorage.setItem(this.sessionKey, JSON.stringify({ email }));
+    return { ok: true, message: 'Login OK' };
   }
 
   logout() {
-    localStorage.removeItem(this.CURRENT_KEY);
+    localStorage.removeItem(this.sessionKey);
   }
 
-  currentUser(): User | null {
-    const raw = localStorage.getItem(this.CURRENT_KEY);
-    return raw ? JSON.parse(raw) as User : null;
-  }
-
-  isAuthenticated(): boolean {
-    return this.currentUser() !== null;
+  currentUser() {
+    const raw = localStorage.getItem(this.sessionKey);
+    return raw ? JSON.parse(raw) : null;
   }
 }

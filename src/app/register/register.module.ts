@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { RouterModule, Routes } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegisterPage } from './register.page';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
-  { path: '', loadComponent: () => import('./register.page').then(m => m.RegisterPage) }
+  { path: '', component: RegisterPage }
 ];
 
 @NgModule({
-  imports: [CommonModule, ReactiveFormsModule, IonicModule, RouterModule.forChild(routes)]
+  imports: [CommonModule, IonicModule, SharedModule, ReactiveFormsModule, RouterModule.forChild(routes), RegisterPage]
 })
-export class RegisterPageModule {}
+export class RegisterModule {}

@@ -1,3 +1,14 @@
-<ion-app class="app-background">
+<ion-app>
+  <ion-header>
+    <ion-toolbar class="app-toolbar">
+      <ion-buttons slot="start" class="logo-button">
+        <button class="logo-wrap" (click)="goHome()">
+          <img src="assets/imgs/veterinaria.png" alt="logo" />
+        </button>
+      </ion-buttons>
+      <ion-title>Iniciar sesión</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
   <ion-router-outlet></ion-router-outlet>
 </ion-app>

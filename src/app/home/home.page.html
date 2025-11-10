@@ -1,14 +1,21 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      PetControl
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- src/app/home/home.page.html -->
+<app-header title="PetControl"></app-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content class="ion-padding">
+  <div class="card-wrapper">
+    <ion-card>
+      <ion-card-content class="centered">
+        <ion-button class="primary-action" expand="block" (click)="verMascotas()">
+          <ion-icon slot="start" name="paw-outline"></ion-icon>
+          🐾 VER MASCOTAS
+        </ion-button>
 
-  <ion-button expand="block" routerLink="/mascotas">🐶 Ver Mascotas</ion-button>
-  <ion-button expand="block" routerLink="/nuevamascota" color="success">➕ Registrar Mascota</ion-button>
+        <div class="spacer"></div>
 
+        <ion-button fill="clear" class="secondary-action" (click)="nuevaMascota()">
+          <ion-icon name="add-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>

@@ -1,25 +1,25 @@
-<app-header title="Iniciar sesión"></app-header>
+<ion-content class="ion-padding">
+  <div class="center-wrapper">
+    <div class="card app-bg-overlay">
+      <h2>Inicia sesión</h2>
 
-<ion-content class="ion-padding app-background" fullscreen>
-  <div class="auth-card">
-    <form [formGroup]="form" (ngSubmit)="submit()">
-      <ion-item>
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input formControlName="email" type="email" placeholder="correo@ejemplo.com"></ion-input>
+      <ion-item lines="none">
+        <ion-label position="stacked">Correo</ion-label>
+        <ion-input [(ngModel)]="email" type="email" placeholder="ejemplo@correo.cl"></ion-input>
       </ion-item>
 
-      <ion-item>
+      <ion-item lines="none">
         <ion-label position="stacked">Contraseña</ion-label>
-        <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
+        <ion-input [(ngModel)]="password" type="password" placeholder="********"></ion-input>
       </ion-item>
 
-      <div *ngIf="error" class="error">{{ error }}</div>
+      <div class="actions">
+        <ion-button expand="block" (click)="doLogin()">INGRESAR</ion-button>
+      </div>
 
-      <ion-button expand="block" type="submit" class="ion-margin-top">Ingresar</ion-button>
-    </form>
-
-    <div class="ion-text-center ion-margin-top">
-      <p>¿No tienes cuenta? <a (click)="router.navigate(['/register'])">Regístrate</a></p>
+      <div class="register-link">
+        ¿NO TIENES CUENTA? <a (click)="goRegister()">REGÍSTRATE</a>
+      </div>
     </div>
   </div>
 </ion-content>

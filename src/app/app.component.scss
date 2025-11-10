@@ -1,0 +1,25 @@
+ion-toolbar.app-toolbar {
+  --background: transparent;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+}
+
+.logo-button {
+  padding-left: 8px;
+}
+
+.logo-wrap {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+.logo-wrap img {
+  height: 36px;
+  width: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+}

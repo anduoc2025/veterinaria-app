@@ -1,23 +1,25 @@
-/* Fondo global */
-.app-background {
-  background-image: url('/assets/img/fondo.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  min-height: 100vh;
+ion-toolbar.app-toolbar {
+  --background: transparent;
+  box-shadow: none;
+  border-bottom: 1px solid rgba(0,0,0,0.08);
 }
 
-/* Ajustes para que el contenido no quede invisible sobre el fondo */
-ion-content .auth-card,
-ion-content .ion-padding,
-ion-card, .card {
-  background: rgba(255,255,255,0.92);
+.logo-button {
+  padding-left: 8px;
 }
 
-/* Logo header (replicado por si acaso) */
-.logo-header {
-  width: 36px;
+.logo-wrap {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 44px;
+}
+
+.logo-wrap img {
   height: 36px;
+  width: 36px;
   object-fit: contain;
   border-radius: 6px;
 }

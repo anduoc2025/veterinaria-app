@@ -11,7 +11,7 @@ import { AppHeaderComponent } from '../components/app-header/app-header.componen
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
   standalone: true,
-  imports: [AppHeaderComponent, CommonModule, IonicModule, ReactiveFormsModule]
+  imports: [CommonModule, IonicModule, ReactiveFormsModule, AppHeaderComponent]
 })
 export class RegisterPage implements OnInit {
   form: FormGroup;
@@ -19,29 +19,35 @@ export class RegisterPage implements OnInit {
 
   constructor(private fb: FormBuilder, private auth: AuthService, public router: Router) {
     this.form = this.fb.group({
-      name: ['', [Validators.required]],
+      name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(4)]]
+      password: ['', Validators.required]
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit() {}
 
-  submit() {
+  async submitRegister() {
     this.error = null;
-    if (this.form.invalid) {
-      this.error = 'Completa los campos correctamente';
-      return;
-    }
-
+    if (this.form.invalid) { this.error = 'Completa los campos'; return; }
     const { name, email, password } = this.form.value;
-    const res = this.auth.register(name, email, password);
-    if (!res.ok) {
-      this.error = res.msg || 'Error al registrar';
-      return;
-    }
 
-    // Al registrarse se guarda sesión automáticamente en AuthService (según implementación)
-    this.router.navigate(['/home']);
+    try {
+      const newUser = { id: '', name: name || '', email: email || '', password: password || '' };
+      if ((this.auth as any).createUser) {
+        await (this.auth as any).createUser(newUser);
+      } else if ((this.auth as any).register) {
+        await (this.auth as any).register(newUser);
+      } else {
+        throw new Error('Método de registro no implementado en AuthService: createUser/register');
+      }
+      this.router.navigate(['/login']);
+    } catch (err: any) {
+      this.error = err?.message ?? 'Error al registrarse';
+    }
+  }
+
+  goToLogin() {
+    this.router.navigate(['/login']);
   }
 }
