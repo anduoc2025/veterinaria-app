@@ -1,0 +1,27 @@
+<!-- Header simple, logo a la izquierda, título centrado, acciones a la derecha -->
+<ion-header class="app-header" role="banner">
+  <ion-toolbar>
+  <div class="left">
+    <button class="logo-btn" (click)="goHome()" aria-label="Home">
+      <img src="assets/img/veterinaria.png" alt="logo" class="logo" />
+    </button>
+  </div>
+
+  <div class="center">
+    <!-- si pasas title desde la página lo muestra; si no, muestra PetControl -->
+    <h1 class="title">{{ title || 'PetControl' }}</h1>
+  </div>
+
+  <div class="right">
+    <ng-container *ngIf="user; else loggedOut">
+      <span class="user-name">{{ user.name }}</span>
+      <button class="action small" (click)="logout()">Salir</button>
+    </ng-container>
+
+    <ng-template #loggedOut>
+      <button class="action outline small" (click)="goLogin()">Iniciar</button>
+      <button class="action filled small" (click)="goRegister()">Registrarse</button>
+    </ng-template>
+  </div>
+  </ion-toolbar>
+</ion-header>

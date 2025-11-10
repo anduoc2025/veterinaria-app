@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/mascotas"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="title-centered">Nueva Mascota</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page-content" fullscreen>
+  <form [formGroup]="mascotaForm" (ngSubmit)="guardar()" class="ion-padding">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input formControlName="nombre" placeholder="Nombre de la mascota"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Tipo</ion-label>
+      <ion-select formControlName="tipo" placeholder="Selecciona tipo">
+        <ion-select-option value="Perro">Perro</ion-select-option>
+        <ion-select-option value="Gato">Gato</ion-select-option>
+        <ion-select-option value="Otro">Otro</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Edad (años)</ion-label>
+      <ion-input type="number" formControlName="edad" min="0"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Peso (kg)</ion-label>
+      <ion-input type="number" formControlName="peso" min="0"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Raza</ion-label>
+      <ion-input formControlName="raza" placeholder="Ej: Labrador"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Color</ion-label>
+      <ion-input formControlName="color" placeholder="Ej: Marrón"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Motivo de la consulta</ion-label>
+      <ion-textarea rows="4" formControlName="motivo" placeholder="Describe el motivo"></ion-textarea>
+    </ion-item>
+
+    <ion-button expand="block" type="submit" [disabled]="mascotaForm.invalid">Guardar</ion-button>
+    <ion-button expand="block" color="light" fill="clear" (click)="cancelar()">Cancelar</ion-button>
+  </form>
+</ion-content>

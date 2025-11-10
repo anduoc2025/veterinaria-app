@@ -1,0 +1,82 @@
+/* Header limpio y compacto */
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 58px;
+  padding: 6px 12px;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+
+  .left, .center, .right {
+    display: flex;
+    align-items: center;
+  }
+
+  .left { flex: 0 0 auto; }
+  .center { flex: 1 1 auto; justify-content: center; }
+  .right { flex: 0 0 auto; gap: 8px; }
+
+  .logo-btn {
+    background: transparent;
+    border: none;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .logo {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+
+  .title {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #222;
+  }
+
+  .user-name {
+    margin-right: 6px;
+    font-weight: 600;
+    color: #333;
+  }
+
+  /* botones simples en header */
+  .action {
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.85rem;
+  }
+
+  .action.small { padding: 6px 8px; font-size: 0.82rem; }
+
+  .action.outline {
+    background: transparent;
+    color: #0a66ff;
+    border: 1px solid rgba(10,102,255,0.12);
+  }
+
+  .action.filled {
+    background: #0a66ff;
+    color: #fff;
+  }
+}
+
+/* responsive */
+@media (max-width: 420px) {
+  .app-header .logo { width: 36px; height: 36px; }
+  .app-header .title { font-size: 1rem; }
+  .app-header .action { font-size: 0.78rem; padding: 5px 8px; }
+}

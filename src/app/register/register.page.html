@@ -1,0 +1,30 @@
+<app-header title="Registrarse"></app-header>
+
+<ion-content class="ion-padding app-background" fullscreen>
+  <div class="auth-card">
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <ion-item>
+        <ion-label position="stacked">Nombre</ion-label>
+        <ion-input formControlName="name" placeholder="Tu nombre"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input formControlName="email" type="email" placeholder="correo@ejemplo.com"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Contraseña</ion-label>
+        <ion-input formControlName="password" type="password" placeholder="Contraseña"></ion-input>
+      </ion-item>
+
+      <div *ngIf="error" class="error">{{ error }}</div>
+
+      <ion-button expand="block" type="submit" class="ion-margin-top">Crear cuenta</ion-button>
+    </form>
+
+    <div class="ion-text-center ion-margin-top">
+      <p>¿Ya tienes cuenta? <a (click)="router.navigate(['/login'])">Ingresar</a></p>
+    </div>
+  </div>
+</ion-content>

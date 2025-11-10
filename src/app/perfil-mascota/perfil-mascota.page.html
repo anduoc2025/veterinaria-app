@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/mascotas"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="mascota; else noData">
+    <h2>{{ mascota.nombre }}</h2>
+    <p><strong>Tipo:</strong> {{ mascota.tipo }}</p>
+    <p><strong>Edad:</strong> {{ mascota.edad }} años</p>
+    <p><strong>Peso:</strong> {{ mascota.peso }} kg</p>
+    <p><strong>Raza:</strong> {{ mascota.raza }}</p>
+    <p><strong>Color:</strong> {{ mascota.color }}</p>
+    <p><strong>Motivo:</strong> {{ mascota.motivo }}</p>
+
+    <ion-button expand="block" color="danger" (click)="eliminar()">Eliminar</ion-button>
+  </div>
+
+  <ng-template #noData>
+    <p>No se encontró la mascota.</p>
+  </ng-template>
+</ion-content>

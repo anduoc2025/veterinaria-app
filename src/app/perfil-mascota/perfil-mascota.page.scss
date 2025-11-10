@@ -1,0 +1,31 @@
+.page-content {
+  padding: 12px;
+}
+
+.title-centered {
+  margin-left: 40px;
+  text-align: center;
+  width: calc(100% - 80px);
+}
+
+.logo-btn img {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.muted {
+  color: var(--ion-color-medium);
+}
+
+.motivo {
+  white-space: pre-wrap;
+  margin-top: 6px;
+}
+
+.empty {
+  text-align: center;
+  color: var(--ion-color-medium);
+  margin-top: 40px;
+}
